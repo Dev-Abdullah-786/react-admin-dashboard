@@ -644,17 +644,17 @@ export const FinancialPrimaryYAxis = {
 // ─── Line Chart ─────────────────────────────────────────────────────────────
 
 export const LinePrimaryXAxis = {
-  valueType: "DateTime",
+  valueType: "DateTime" as const,
+  intervalType: "Years" as const,
+  edgeLabelPlacement: "Shift" as const,
   labelFormat: "y",
-  intervalType: "Years",
-  edgeLabelPlacement: "Shift",
   majorGridLines: { width: 0 },
   background: "white",
 };
 
 export const LinePrimaryYAxis = {
   labelFormat: "{value}%",
-  rangePadding: "None",
+  rangePadding: "None" as const,
   minimum: 0,
   maximum: 100,
   interval: 20,
@@ -3096,8 +3096,8 @@ export const stackedPrimaryXAxis = {
   minorTickLines: { width: 0 },
   interval: 1,
   lineStyle: { width: 0 },
-  labelIntersectAction: "Rotate45",
-  valueType: "Category",
+  valueType: "Category" as const,
+  labelIntersectAction: "Rotate45" as const,
 };
 
 export const stackedPrimaryYAxis = {

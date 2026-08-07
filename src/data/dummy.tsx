@@ -43,6 +43,7 @@ import {
   AiOutlineBarChart,
   AiOutlineStock,
 } from "react-icons/ai";
+import type { AxisModel, RangeColorSettingModel } from "@syncfusion/ej2-react-charts";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -207,10 +208,12 @@ interface ScheduleData {
   CategoryColor: string;
 }
 
-interface ChartDataPoint {
-  x: string | Date | number;
+export interface ChartDataPoint {
+  x: string | number | Date;
   y: number;
   text?: string;
+  color?: string;
+  [key: string]: unknown;
 }
 
 interface ChartSeries {
@@ -404,7 +407,7 @@ const customerGridStatus = (props: CustomerGridStatusProps) => (
 
 // ─── Chart Configurations ──────────────────────────────────────────────────
 
-export const areaPrimaryXAxis = {
+export const areaPrimaryXAxis: AxisModel = {
   valueType: "DateTime",
   labelFormat: "y",
   majorGridLines: { width: 0 },
@@ -413,7 +416,7 @@ export const areaPrimaryXAxis = {
   labelStyle: { color: "gray" },
 };
 
-export const areaPrimaryYAxis = {
+export const areaPrimaryYAxis: AxisModel = {
   labelFormat: "{value}%",
   lineStyle: { width: 0 },
   maximum: 4,
@@ -423,13 +426,13 @@ export const areaPrimaryYAxis = {
   labelStyle: { color: "gray" },
 };
 
-export const barPrimaryXAxis = {
+export const barPrimaryXAxis: AxisModel = {
   valueType: "Category",
   interval: 1,
   majorGridLines: { width: 0 },
 };
 
-export const barPrimaryYAxis = {
+export const barPrimaryYAxis: AxisModel = {
   majorGridLines: { width: 0 },
   majorTickLines: { width: 0 },
   lineStyle: { width: 0 },
@@ -572,44 +575,44 @@ export const barCustomSeries: ChartSeries[] = [
 
 // ─── Color Mapping ──────────────────────────────────────────────────────────
 
-export const colorMappingData: (ChartDataPoint[] | string[])[] = [
-  [
-    { x: "Jan", y: 6.96 },
-    { x: "Feb", y: 8.9 },
-    { x: "Mar", y: 12 },
-    { x: "Apr", y: 17.5 },
-    { x: "May", y: 22.1 },
-    { x: "June", y: 25 },
-    { x: "July", y: 29.4 },
-    { x: "Aug", y: 29.6 },
-    { x: "Sep", y: 25.8 },
-    { x: "Oct", y: 21.1 },
-    { x: "Nov", y: 15.5 },
-    { x: "Dec", y: 9.9 },
-  ],
-  ["#FFFF99"],
-  ["#FFA500"],
-  ["#FF4040"],
+export const colorMappingData: ChartDataPoint[] = [
+  { x: "Jan", y: 6.96 },
+  { x: "Feb", y: 8.9 },
+  { x: "Mar", y: 12 },
+  { x: "Apr", y: 17.5 },
+  { x: "May", y: 22.1 },
+  { x: "June", y: 25 },
+  { x: "July", y: 29.4 },
+  { x: "Aug", y: 29.6 },
+  { x: "Sep", y: 25.8 },
+  { x: "Oct", y: 21.1 },
+  { x: "Nov", y: 15.5 },
+  { x: "Dec", y: 9.9 },
 ];
 
-export const rangeColorMapping = [
-  { label: "1°C to 10°C", start: "1", end: "10", colors: colorMappingData[1] },
+export const rangeColorMapping: RangeColorSettingModel[] = [
+  {
+    label: "1°C to 10°C",
+    start: 1,
+    end: 10,
+    colors: ["#FFFF99"],
+  },
   {
     label: "11°C to 20°C",
-    start: "11",
-    end: "20",
-    colors: colorMappingData[2],
+    start: 11,
+    end: 20,
+    colors: ["#FFA500"],
   },
   {
     label: "21°C to 30°C",
-    start: "21",
-    end: "30",
-    colors: colorMappingData[3],
+    start: 21,
+    end: 30,
+    colors: ["#FF4040"],
   },
 ];
 
-export const ColorMappingPrimaryXAxis = {
-  valueType: "Category",
+export const ColorMappingPrimaryXAxis: AxisModel = {
+  valueType: "Category" as const,
   majorGridLines: { width: 0 },
   title: "Months",
 };
@@ -624,15 +627,15 @@ export const ColorMappingPrimaryYAxis = {
 
 // ─── Financial Chart ───────────────────────────────────────────────────────
 
-export const FinancialPrimaryXAxis = {
-  valueType: "DateTime",
+export const FinancialPrimaryXAxis: AxisModel = {
+  valueType: "DateTime" as const,
   minimum: new Date("2016, 12, 31"),
   maximum: new Date("2017, 9, 30"),
   crosshairTooltip: { enable: true },
   majorGridLines: { width: 0 },
 };
 
-export const FinancialPrimaryYAxis = {
+export const FinancialPrimaryYAxis: AxisModel = {
   title: "Price",
   minimum: 100,
   maximum: 180,
